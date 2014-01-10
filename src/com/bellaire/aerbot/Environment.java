@@ -12,10 +12,19 @@ public class Environment {
     Joystick left = new Joystick(1);
     Joystick right = new Joystick(2);
     
-    Camera camera = new Camera();
+    private Camera camera = new Camera();
+    private Sonar sonar = new Sonar();
     
     public Environment(SimpleRobot sr) {
         this.sr = sr;
+    }
+    
+    public Camera getCamera() {
+        return camera;
+    }
+    
+    public Sonar getSonar() {
+        return sonar;
     }
     
     public boolean isOperator() {
