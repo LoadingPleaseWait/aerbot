@@ -11,8 +11,4 @@ public class Camera implements Sensor {
         //camera = AxisCamera.getInstance();
     }
     
-    public void update() {
-        
-    }
-    
 }
