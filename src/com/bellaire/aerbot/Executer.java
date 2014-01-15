@@ -52,8 +52,7 @@ public class Executer {
     public void stopAll() {
         for(int i = 0; i < running.size(); i++) {
             Listener l = (Listener) running.elementAt(i);
-            running.removeElement(l);
-            notRunning.addElement(l);
+            this.stop(l);
         }
     }
     

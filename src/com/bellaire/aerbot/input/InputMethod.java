@@ -2,8 +2,12 @@ package com.bellaire.aerbot.input;
 
 public interface InputMethod {
     
-    public double getLeftValue();
+    public double getLeftX();
     
-    public double getRightValue();
+    public double getRightX();
+    
+    public double getLeftY();
+    
+    public double getRightY();
     
 }
