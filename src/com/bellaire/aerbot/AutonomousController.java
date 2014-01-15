@@ -7,6 +7,10 @@ public class AutonomousController extends Controller {
     public AutonomousController(Environment e) {
         super(e);
     }
+    
+    public void start() {
+        
+    }
 
     public void update() {
        for(int i = 0; i < 4; i++) {
@@ -15,6 +19,10 @@ public class AutonomousController extends Controller {
             env.drive.drive(0, 0.75);
         }
         env.drive.drive(0, 0);
+    }
+    
+    public void end() {
+        
     }
     
 }

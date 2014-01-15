@@ -8,7 +8,7 @@ public class Environment {
     
     private SimpleRobot sr;
     
-    RobotDrive drive = new RobotDrive(1, 2);
+    RobotDrive drive = new RobotDrive(1,3); // switch to (1,2)
     Joystick left = new Joystick(1);
     Joystick right = new Joystick(2);
     
@@ -17,6 +17,10 @@ public class Environment {
     
     public Environment(SimpleRobot sr) {
         this.sr = sr;
+        
+        // kFront* do not refer to any motors.
+        drive.setInvertedMotor(RobotDrive.MotorType.kRearRight, true);
+        drive.setInvertedMotor(RobotDrive.MotorType.kRearLeft, true);
     }
     
     public Camera getCamera() {

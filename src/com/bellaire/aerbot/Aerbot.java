@@ -9,7 +9,9 @@ package com.bellaire.aerbot;
 
 
 import edu.wpi.first.wpilibj.SimpleRobot;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
+// change to iterative later
 public class Aerbot extends SimpleRobot {
     
     Environment e = new Environment(this);
@@ -18,11 +20,13 @@ public class Aerbot extends SimpleRobot {
     
     // called when bot switches to auto
     public void autonomous() {
+        SmartDashboard.putString("Mode", "Autonomous");
         ac.update();
     }
 
     // called when bot switched to op
     public void operatorControl() {
+        SmartDashboard.putString("Mode", "Teleop");
         oc.update();
     }
     
