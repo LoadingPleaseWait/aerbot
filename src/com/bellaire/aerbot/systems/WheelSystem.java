@@ -1,6 +1,6 @@
 package com.bellaire.aerbot.systems;
 
-import com.bellaire.aerbot.Input;
+import com.bellaire.aerbot.input.InputMethod;
 import edu.wpi.first.wpilibj.RobotDrive;
 
 public class WheelSystem implements RobotSystem {
@@ -18,8 +18,16 @@ public class WheelSystem implements RobotSystem {
         
     }
     
-    public void move(Input input) {
-        wheels.tankDrive(input.getLeftJoystick(), input.getRightJoystick());
+    // adjusts value for deadzone
+    public double adjust(double d) {
+        if(d > 0.15)
+            return d;
+        return 0;
+    }
+    
+    public void move(InputMethod input) {
+        //wheels.tankDrive(input.getLeftJoystick(), input.getRightJoystick());
+        wheels.tankDrive(input.getLeftValue(), input.getRightValue());
     }
     
 }

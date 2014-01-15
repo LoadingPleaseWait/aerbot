@@ -6,7 +6,7 @@ public interface Listener {
     
     public void init(Environment env);
     
-    public boolean isListening();
+    public boolean isComplete();
     
     public boolean shouldExecute();
     
