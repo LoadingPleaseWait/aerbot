@@ -1,24 +1,17 @@
 package com.bellaire.aerbot;
 
-public abstract class Controller implements Sensor {
-    
+public abstract class Controller {
+
     protected Environment env;
+    protected Executer exec;
     
-    public Controller(Environment e) {
-        this.env = e;
+    public Controller(Environment env, Executer exec) {
+        this.env = env;
+        this.exec = exec;
     }
     
-    public abstract void start();
-    public abstract void update();
-    public abstract void end();
-    
-    public boolean enabled() {
-        if(env.isAutonomous() && this instanceof AutonomousController) {
-            return true;
-        } else if(env.isOperator() && this instanceof OperatorController) {
-            return true;
-        }
-        return false;
+    public void update() {
+        exec.update();
     }
     
 }
