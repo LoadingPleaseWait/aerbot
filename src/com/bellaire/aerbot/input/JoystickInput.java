@@ -11,11 +11,19 @@ public class JoystickInput implements InputMethod {
         right = new Joystick(2);
     }
 
-    public double getLeftValue() {
+    public double getLeftY() {
         return left.getY();
     }
 
-    public double getRightValue() {
+    public double getRightY() {
+        return right.getY();
+    }
+    
+    public double getLeftX() {
+        return left.getY();
+    }
+
+    public double getRightX() {
         return right.getY();
     }
     

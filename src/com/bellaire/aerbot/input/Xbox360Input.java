@@ -10,11 +10,19 @@ public class Xbox360Input implements InputMethod {
         controller = new Joystick(1);
     }
     
-    public double getLeftValue() {
+    public double getLeftX() {
+        return controller.getRawAxis(1);
+    }
+
+    public double getRightX() {
+        return controller.getRawAxis(4);
+    }
+    
+    public double getLeftY() {
         return controller.getRawAxis(2);
     }
 
-    public double getRightValue() {
+    public double getRightY() {
         return controller.getRawAxis(5);
     }
     

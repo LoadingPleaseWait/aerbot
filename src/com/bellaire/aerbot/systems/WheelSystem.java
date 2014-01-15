@@ -15,19 +15,11 @@ public class WheelSystem implements RobotSystem {
     }
 
     public void destroy() {
-        
-    }
-    
-    // adjusts value for deadzone
-    public double adjust(double d) {
-        if(d > 0.15)
-            return d;
-        return 0;
+       
     }
     
     public void move(InputMethod input) {
-        //wheels.tankDrive(input.getLeftJoystick(), input.getRightJoystick());
-        wheels.tankDrive(input.getLeftValue(), input.getRightValue());
+        wheels.arcadeDrive(input.getLeftY(), input.getRightX());
     }
     
 }
