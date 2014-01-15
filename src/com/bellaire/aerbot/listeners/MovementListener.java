@@ -20,8 +20,8 @@ public class MovementListener implements Listener {
         this.env = env;
     }
 
-    public boolean isListening() {
-        return true;
+    public boolean isComplete() {
+        return false;
     }
 
     public boolean shouldExecute() {

@@ -16,3 +16,17 @@ http://wpilib.screenstepslive.com/s/3120/m/7912/l/85778-composite-controllers-ro
 running the bot
 
 http://wpilib.screenstepslive.com/s/3120/m/7885/l/79460-running-the-program-on-the-robot
+
+//definitions
+Joystick stick = new Joystick(1);
+
+//usage
+float axis = stick.getRawAxis(axisNumber); //see table below for axis numbers
+boolean button = stick.getRawButton(buttonNumber);
+Axis indexes:
+1 - LeftX
+2 - LeftY
+3 - Triggers (Each trigger = 0 to 1, axis value = right - left)
+4 - RightX
+5 - RightY
+6 - DPad Left/Right

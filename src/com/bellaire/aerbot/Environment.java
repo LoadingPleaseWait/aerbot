@@ -1,5 +1,7 @@
 package com.bellaire.aerbot;
 
+import com.bellaire.aerbot.input.InputMethod;
+import com.bellaire.aerbot.input.JoystickInput;
 import com.bellaire.aerbot.systems.WheelSystem;
 import edu.wpi.first.wpilibj.RobotBase;
 
@@ -7,20 +9,20 @@ public class Environment {
     
     private RobotBase robot;
     
-    private Input input;
+    private InputMethod input;
     
     private WheelSystem wheels;
 
     public Environment(RobotBase robot) {
         this.robot = robot;
         
-        this.input = new Input();
+        this.input = new JoystickInput();
         
         this.wheels = new WheelSystem();
         wheels.init();
     }
     
-    public Input getInput() {
+    public InputMethod getInput() {
         return input;
     }
     
