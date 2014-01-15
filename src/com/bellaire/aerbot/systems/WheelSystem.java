@@ -1,5 +1,6 @@
-package com.bellaire.aerbot;
+package com.bellaire.aerbot.systems;
 
+import com.bellaire.aerbot.Input;
 import edu.wpi.first.wpilibj.RobotDrive;
 
 public class WheelSystem implements RobotSystem {
