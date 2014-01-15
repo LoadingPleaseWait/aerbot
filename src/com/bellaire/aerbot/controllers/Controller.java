@@ -1,4 +1,7 @@
-package com.bellaire.aerbot;
+package com.bellaire.aerbot.controllers;
+
+import com.bellaire.aerbot.Environment;
+import com.bellaire.aerbot.Executer;
 
 public abstract class Controller {
 

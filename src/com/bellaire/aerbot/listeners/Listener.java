@@ -1,4 +1,6 @@
-package com.bellaire.aerbot;
+package com.bellaire.aerbot.listeners;
+
+import com.bellaire.aerbot.Environment;
 
 public interface Listener {
     

@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package com.bellaire.aerbot;
+package com.bellaire.aerbot.controllers;
 
 /**
  *
