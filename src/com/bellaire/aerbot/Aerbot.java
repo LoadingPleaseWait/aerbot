@@ -8,30 +8,40 @@
 package com.bellaire.aerbot;
 
 
-import edu.wpi.first.wpilibj.SimpleRobot;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj.IterativeRobot;
 
-// change to iterative later
-public class Aerbot extends SimpleRobot {
+public class Aerbot extends IterativeRobot {
     
-    Environment e = new Environment(this);
-    AutonomousController ac = new AutonomousController(e);
-    OperatorController oc = new OperatorController(e);
+    private Environment environment;
+    private Executer exec;
     
-    // called when bot switches to auto
-    public void autonomous() {
-        SmartDashboard.putString("Mode", "Autonomous");
-        ac.update();
+    private AutonomousController autonomous;
+    private OperatorController operator;
+    
+    public void robotInit() {
+        this.environment = new Environment(this);
+        this.exec = new Executer(environment);
+    }
+    
+    public void autonomousInit() {
+        exec.onAutonomous();
     }
 
-    // called when bot switched to op
-    public void operatorControl() {
-        SmartDashboard.putString("Mode", "Teleop");
-        oc.update();
+    public void autonomousPeriodic() {
+
     }
     
-    // called on test mode
-    public void test() {
+    public void teleopInit() {
+        exec.onTeleop();
+        operator = new OperatorController(environment, exec);
+    }
+
+    public void teleopPeriodic() {
+        operator.update();
+    }
+    
+    public void testPeriodic() {
     
     }
+    
 }

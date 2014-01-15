@@ -1,42 +1,38 @@
 package com.bellaire.aerbot;
 
-import edu.wpi.first.wpilibj.Joystick;
-import edu.wpi.first.wpilibj.RobotDrive;
-import edu.wpi.first.wpilibj.SimpleRobot;
+import edu.wpi.first.wpilibj.RobotBase;
 
 public class Environment {
     
-    private SimpleRobot sr;
+    private RobotBase robot;
     
-    RobotDrive drive = new RobotDrive(1,3); // switch to (1,2)
-    Joystick left = new Joystick(1);
-    Joystick right = new Joystick(2);
+    private Input input;
     
-    private Camera camera = new Camera();
-    private Sonar sonar = new Sonar();
-    
-    public Environment(SimpleRobot sr) {
-        this.sr = sr;
+    private WheelSystem wheels;
+
+    public Environment(RobotBase robot) {
+        this.robot = robot;
         
-        // kFront* do not refer to any motors.
-        drive.setInvertedMotor(RobotDrive.MotorType.kRearRight, true);
-        drive.setInvertedMotor(RobotDrive.MotorType.kRearLeft, true);
+        this.input = new Input();
+        
+        this.wheels = new WheelSystem();
+        wheels.init();
     }
     
-    public Camera getCamera() {
-        return camera;
+    public Input getInput() {
+        return input;
     }
     
-    public Sonar getSonar() {
-        return sonar;
-    }
-    
-    public boolean isOperator() {
-        return sr.isOperatorControl();
+    public WheelSystem getWheelSystem() {
+        return wheels;
     }
     
     public boolean isAutonomous() {
-        return sr.isAutonomous();
+        return robot.isAutonomous();
+    }
+    
+    public boolean isOperatorControl() {
+        return robot.isOperatorControl();
     }
     
 }
