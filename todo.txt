@@ -1,0 +1,18 @@
+1/14/2013
+
+- Test basic code
+- Create a new robot framework for control
+- Implement SmartDashboard (http://wpilib.screenstepslive.com/s/3120/m/7932/l/90078-getting-started-with-the-smartdashboard)
+- Implement IterativeRobot and test (http://lcec.us/javadoc/edu/wpi/first/wpilibj/IterativeRobot.html)
+http://wpilib.screenstepslive.com/s/3120/m/7912/l/130578-choosing-a-base-class
+
+- Make the controllers updatable
+- Sensors http://wpilib.screenstepslive.com/s/3120/m/7912/l/130672-wpilib-sensor-overview
+
+if you need to invert,
+
+http://wpilib.screenstepslive.com/s/3120/m/7912/l/85778-composite-controllers-robotdrive
+
+running the bot
+
+http://wpilib.screenstepslive.com/s/3120/m/7885/l/79460-running-the-program-on-the-robot

@@ -8,12 +8,20 @@ public class OperatorController extends Controller {
         super(e);
     }
     
+    public void start() {
+        
+    }
+    
     public void update() {
        env.drive.setSafetyEnabled(true);
        while(env.isOperator()) {
            env.drive.tankDrive(env.left, env.right);
            Timer.delay(0.01);
        }
+    }
+    
+    public void end() {
+        
     }
     
 }

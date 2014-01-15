@@ -44,11 +44,6 @@
                     <target>javadoc</target>
                 </action>
             </ide-actions>
-            <export>
-                <type>folder</type>
-                <location>build</location>
-                <build-target>jar-app</build-target>
-            </export>
             <view>
                 <items>
                     <source-folder style="packages">
@@ -61,11 +56,11 @@
                 </items>
                 <context-menu>
                     <ide-action name="build"/>
-                    <ide-action name="clean"/>
-                    <ide-action name="run"/>
                     <ide-action name="rebuild"/>
-                    <ide-action name="debug"/>
+                    <ide-action name="clean"/>
                     <ide-action name="javadoc"/>
+                    <ide-action name="run"/>
+                    <ide-action name="debug"/>
                     <action>
                         <label>Sun SPOT-deploy</label>
                         <target>deploy</target>
