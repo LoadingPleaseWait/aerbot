@@ -1,5 +1,6 @@
 package com.bellaire.aerbot.systems;
 
+import com.bellaire.aerbot.Environment;
 import edu.wpi.first.wpilibj.camera.AxisCamera;
 import edu.wpi.first.wpilibj.camera.AxisCameraException;
 import edu.wpi.first.wpilibj.image.BinaryImage;
@@ -11,7 +12,6 @@ import edu.wpi.first.wpilibj.image.ParticleAnalysisReport;
 import edu.wpi.first.wpilibj.image.RGBImage;
 
 public class CameraSystem implements RobotSystem {
-
   private AxisCamera camera;
 
   //Camera constants used for distance calculation
@@ -59,8 +59,8 @@ public class CameraSystem implements RobotSystem {
     double verticalScore;
   };
 
-  public void init() {
-    camera = AxisCamera.getInstance();
+  public void init(Environment e) {
+    camera = e.getCameraSystem().camera;
   }
 
   public void destroy() {
