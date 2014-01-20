@@ -2,10 +2,6 @@ package com.bellaire.aerbot.systems;
 
 import edu.wpi.first.wpilibj.Ultrasonic;
 
-/**
- *
- * @author Agro
- */
 public class SonarSystem implements RobotSystem {
 
   private Ultrasonic ultrasonic;

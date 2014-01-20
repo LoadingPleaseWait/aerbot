@@ -20,6 +20,14 @@ public class Aerbot extends IterativeRobot {
     this.exec = new Executer(environment);
   }
 
+  public void disabledInit() {
+    return;
+  }
+
+  public void disabledPeriodic() {
+    return;
+  }
+
   public void autonomousInit() {
     exec.onAutonomous();
   }
@@ -31,7 +39,7 @@ public class Aerbot extends IterativeRobot {
 
     try {
       speed = camera.getXCoordinate() * Kp;
-      environment.getWheelSystem().move(speed, speed);
+      environment.getWheelSystem().setMotors(speed, speed);
 
       /*
        if (camera.getDistance() > 10) {

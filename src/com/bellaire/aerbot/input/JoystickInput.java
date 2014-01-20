@@ -3,7 +3,6 @@ package com.bellaire.aerbot.input;
 import edu.wpi.first.wpilibj.Joystick;
 
 public class JoystickInput implements InputMethod {
-
   private Joystick left, right;
 
   public JoystickInput() {
@@ -26,5 +25,4 @@ public class JoystickInput implements InputMethod {
   public double getRightX() {
     return right.getY();
   }
-
 }

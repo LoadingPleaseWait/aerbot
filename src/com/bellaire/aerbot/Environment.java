@@ -19,13 +19,8 @@ public class Environment {
 
   public Environment(RobotBase robot) {
     this.robot = robot;
-
-
-
     this.input = new Xbox360Input();
-
     this.wheels = new WheelSystem();
-
     this.camera = new CameraSystem();
 
     camera.init();
@@ -50,5 +45,4 @@ public class Environment {
   public boolean isOperatorControl() {
     return robot.isOperatorControl();
   }
-
 }
