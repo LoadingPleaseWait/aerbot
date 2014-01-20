@@ -1,16 +1,5 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package com.bellaire.aerbot.systems;
 
-/**
- *
- * @author Agro
- */
-import com.bellaire.aerbot.exceptions.HotTargetNotFoundException;
 import edu.wpi.first.wpilibj.camera.AxisCamera;
 import edu.wpi.first.wpilibj.camera.AxisCameraException;
 import edu.wpi.first.wpilibj.image.BinaryImage;
@@ -97,13 +86,12 @@ public class CameraSystem implements RobotSystem {
   }
 
   // @return x coordinate of the target
-  public double getXCoordinate() throws HotTargetNotFoundException, NIVisionException {
+  public double getXCoordinate() throws AxisCameraException, NIVisionException {
     TargetReport target = new TargetReport();
     int verticalTargets[] = new int[MAX_PARTICLES];
     int horizontalTargets[] = new int[MAX_PARTICLES];
     int verticalTargetCount, horizontalTargetCount;
 
-    //try {
     /**
      * Do the image capture with the camera and apply the algorithm
      * described above. This sample will either get images from the camera
@@ -211,7 +199,6 @@ public class CameraSystem implements RobotSystem {
           System.out.println("Distance: " + distance);
         }
       }
-
     }
 
     /**
@@ -222,14 +209,8 @@ public class CameraSystem implements RobotSystem {
     filteredImage.free();
     thresholdImage.free();
     image.free();
+    return 0;
 
-    throw new HotTargetNotFoundException();// no hot target was found
-
-//            } catch (AxisCameraException ex) {        // this is needed if the camera.getImage() is called
-//                ex.printStackTrace();
-    /*} catch (NIVisionException ex) {
-     ex.printStackTrace();
-     } */
   }
 
   double computeDistance(BinaryImage image, ParticleAnalysisReport report, int particleNumber) throws NIVisionException {
