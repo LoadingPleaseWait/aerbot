@@ -12,12 +12,12 @@ package com.bellaire.aerbot.systems;
  */
 public class CameraSystem implements RobotSystem {
 
-    public void init() {
-        
-    }
+  public void init() {
 
-    public void destroy() {
-        
-    }
-    
+  }
+
+  public void destroy() {
+
+  }
+
 }

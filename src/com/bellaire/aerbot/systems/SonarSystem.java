@@ -6,12 +6,12 @@ package com.bellaire.aerbot.systems;
  */
 public class SonarSystem implements RobotSystem {
 
-    public void init() {
-       
-    }
+  public void init() {
 
-    public void destroy() {
-        
-    }
-    
+  }
+
+  public void destroy() {
+
+  }
+
 }
