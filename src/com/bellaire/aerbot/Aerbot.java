@@ -10,6 +10,9 @@ package com.bellaire.aerbot;
 
 import com.bellaire.aerbot.controllers.AutonomousController;
 import com.bellaire.aerbot.controllers.OperatorController;
+import com.bellaire.aerbot.systems.CameraSystem;
+import edu.wpi.first.wpilibj.image.NIVisionException;
+import com.bellaire.aerbot.exceptions.HotTargetNotFoundException;
 import edu.wpi.first.wpilibj.IterativeRobot;
 
 public class Aerbot extends IterativeRobot {
@@ -30,7 +33,27 @@ public class Aerbot extends IterativeRobot {
   }
 
   public void autonomousPeriodic() {
-    return;
+    double speed;
+    double Kp = 1.0;
+    CameraSystem camera = environment.getCameraSystem();
+
+    try {
+      speed = camera.getXCoordinate() * Kp;
+      environment.getWheelSystem().move(speed, speed);
+
+      /*
+      if (camera.getDistance() > 10) {
+        environment.getWheelSystem().move(1, -1);
+      } else if (camera.getDistance() < 5) {
+        environment.getWheelSystem().move(1, -1);
+      } else {
+        environment.getWheelSystem().move(0, 0);
+      }
+      */
+    } catch (NIVisionException e) {
+      e.printStackTrace();
+    }
+
   }
 
   public void teleopInit() {

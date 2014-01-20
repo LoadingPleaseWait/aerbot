@@ -22,4 +22,7 @@ public class WheelSystem implements RobotSystem {
     wheels.arcadeDrive(input.getLeftY(), input.getRightX());
   }
 
+  public void move(double left, double right) {
+    wheels.setLeftRightMotorOutputs(left, right);
+  }
 }

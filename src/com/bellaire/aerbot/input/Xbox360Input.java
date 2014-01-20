@@ -25,5 +25,4 @@ public class Xbox360Input implements InputMethod {
   public double getRightY() {
     return controller.getRawAxis(5);
   }
-
 }

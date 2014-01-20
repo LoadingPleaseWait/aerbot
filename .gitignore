@@ -1,7 +1,7 @@
 build/
 lib/
 resources/
-nbproject/
+#nbproject/
 
 *.class
 *.jar
