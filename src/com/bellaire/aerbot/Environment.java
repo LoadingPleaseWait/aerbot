@@ -14,10 +14,9 @@ public class Environment {
 
   private InputMethod input;
 
+  private CameraSystem camera;
   private WheelSystem wheels;
   private GyroSystem gyro;
-
-  private CameraSystem camera;
 
   public Environment(RobotBase robot) {
     this.robot = robot;
@@ -44,6 +43,10 @@ public class Environment {
 
   public CameraSystem getCameraSystem() {
     return camera;
+  }
+  
+  public GyroSystem getGyroSystem() {
+      return gyro;
   }
   
   public boolean isAutonomous() {
