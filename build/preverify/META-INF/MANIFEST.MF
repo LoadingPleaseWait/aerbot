@@ -1,6 +1,15 @@
+<<<<<<< HEAD
 Manifest-Version: 1.0
 Built-By: wpilibj-buildmaster
 Build-Jdk: 1.6.0_29
 Created-By: Apache Maven 3.1.0
 Archiver-Version: Plexus Archiver
 
+=======
+Manifest-Version: 1.0
+Built-By: wpilibj-buildmaster
+Build-Jdk: 1.6.0_29
+Created-By: Apache Maven 3.1.0
+Archiver-Version: Plexus Archiver
+
+>>>>>>> 8923f3db1cde4d20961d549b73fc5d68b95861e5

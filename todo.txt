@@ -1,3 +1,11 @@
+<<<<<<< HEAD
+=======
+1/19/2014
+
+- Finalize camera test
+- Write autonomous code
+
+>>>>>>> 8923f3db1cde4d20961d549b73fc5d68b95861e5
 1/14/2013
 
 - Test basic code
