@@ -1,30 +1,5 @@
 package com.bellaire.aerbot.systems;
 
-<<<<<<< HEAD
-import com.bellaire.aerbot.input.InputMethod;
-import edu.wpi.first.wpilibj.RobotDrive;
-
-public class WheelSystem implements RobotSystem {
-
-    private RobotDrive wheels;
-    
-    public void init() {
-        wheels = new RobotDrive(1, 3);
-        
-        wheels.setInvertedMotor(RobotDrive.MotorType.kRearRight, true);
-        wheels.setInvertedMotor(RobotDrive.MotorType.kRearLeft, true);
-    }
-
-    public void destroy() {
-       
-    }
-    
-    public void move(InputMethod input) {
-        wheels.arcadeDrive(input.getLeftY(), input.getRightX());
-    }
-    
-}
-=======
 import com.bellaire.aerbot.Environment;
 import com.bellaire.aerbot.input.InputMethod;
 import edu.wpi.first.wpilibj.RobotDrive;
@@ -66,4 +41,3 @@ public class WheelSystem implements RobotSystem {
     //wheels.drive(-1.0, -gyro.getHeading() * 0.05);
   }
 }
->>>>>>> 8923f3db1cde4d20961d549b73fc5d68b95861e5
