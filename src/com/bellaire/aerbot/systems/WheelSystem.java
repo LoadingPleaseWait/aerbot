@@ -2,6 +2,7 @@ package com.bellaire.aerbot.systems;
 
 import com.bellaire.aerbot.Environment;
 import com.bellaire.aerbot.input.InputMethod;
+import com.bellaire.aerbot.input.Xbox360Input;
 import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.command.PIDSubsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -50,6 +51,8 @@ public class WheelSystem extends PIDSubsystem implements RobotSystem {
         wheels.arcadeDrive(input.getLeftY(), input.getRightX());
         SmartDashboard.putNumber("Gyro Heading", gyro.getHeading());
         //wheels.drive(-1.0, -gyro.getHeading() * 0.05);
+        if (input.getButton(Xbox360Input.BUTTON_BACK))
+            sonar.ping();
     }
     
     public void driveToDistance(double distance){
