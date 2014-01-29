@@ -10,5 +10,13 @@ public interface InputMethod {
     
     public double getRightY();
 
-    public boolean getButton(int button);
+    public boolean getIntakeIn();
+    
+    public boolean getIntakeOut();
+    
+    public boolean getIntakePneumatic();
+    
+    public boolean getShoot();
+    
+    public boolean getAim();
 }
