@@ -51,9 +51,6 @@ public class WheelSystem extends PIDSubsystem implements RobotSystem {
         wheels.arcadeDrive(input.getLeftY(), input.getRightX());
         SmartDashboard.putNumber("Gyro Heading", gyro.getHeading());
         //wheels.drive(-1.0, -gyro.getHeading() * 0.05);
-        if (input.getButton(Xbox360Input.BUTTON_BACK)) {
-            sonar.ping();
-        }
     }
     
     public void faceForward(){
