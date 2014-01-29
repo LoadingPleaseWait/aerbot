@@ -52,9 +52,9 @@ public class WheelSystem extends PIDSubsystem implements RobotSystem {
         SmartDashboard.putNumber("Gyro Heading", gyro.getHeading());
         //wheels.drive(-1.0, -gyro.getHeading() * 0.05);
     }
-    
-    public void faceForward(){
-        if(gyro.getHeading() < 180)
+
+    public void faceForward() {
+        if (gyro.getHeading() < 90 || (gyro.getHeading() < 270 && gyro.getHeading() > 180))
             setMotors(-.25,.25);
         else
             setMotors(.25, -.25);
@@ -70,15 +70,15 @@ public class WheelSystem extends PIDSubsystem implements RobotSystem {
     }
 
     public void selfCatch() {
-        if (gyro.getHeading() > 1 && gyro.getHeading() < 358)
+        if (gyro.getHeading() > 1 && gyro.getHeading() < 358) {
             faceForward();
-        else if(getPosition() == 0){
+        } else if (getPosition() == 0) {
             // if getPosition equals the point in front of the truss
             //shoot
             driveToDistance(0);//driveToDistance point behind truss
-        }else if(getSetpoint() == 0)
+        } else if (getSetpoint() == 0) {
             driveToDistance(0);//drive to point behind the truss
-        else if (getSetpoint() != 0 || getSetpoint() == 0) {
+        } else if (getSetpoint() != 0 || getSetpoint() == 0) {
             //if setpoint is not the point in front of the truss OR the setpoint is the point in front of the truss
             driveToDistance(0);//drive to point in front of truss
         }
