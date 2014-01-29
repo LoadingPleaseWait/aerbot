@@ -7,13 +7,13 @@ public class Xbox360Input implements InputMethod {
     private Joystick controller;
     
     public static final int BUTTON_A = 1;
-    public static final int BUTTON_B = 2;
-    public static final int BUTTON_X = 3;
+    public static final int BUTTON_B = 2;// intake out
+    public static final int BUTTON_X = 3;// intake in
     public static final int BUTTON_Y = 4;
     public static final int BUTTON_LB = 5;
-    public static final int BUTTON_RB = 6;
-    public static final int BUTTON_BACK = 7;
-    public static final int BUTTON_START = 8;
+    public static final int BUTTON_RB = 6;// intake pneumatic
+    public static final int BUTTON_BACK = 7;// not to be used
+    public static final int BUTTON_START = 8;//not to be used
     
     
     
@@ -36,8 +36,24 @@ public class Xbox360Input implements InputMethod {
     public double getRightY() {
         return controller.getRawAxis(5);
     }
-    public boolean getButton(int button)
-    {
-        return controller.getRawButton(button);
+
+    public boolean getIntakeIn() {
+        return controller.getRawButton(BUTTON_X);
+    }
+
+    public boolean getIntakeOut() {
+        return controller.getRawButton(BUTTON_B);
+    }
+
+    public boolean getIntakePneumatic() {
+        return controller.getRawButton(BUTTON_LB);
+    }
+
+    public boolean getShoot() {
+        return controller.getRawAxis(3) < 0;
+    }
+
+    public boolean getAim() {
+        return controller.getRawAxis(3) > 0;
     }
 }
