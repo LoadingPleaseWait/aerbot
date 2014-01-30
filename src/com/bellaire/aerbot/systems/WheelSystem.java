@@ -3,7 +3,9 @@ package com.bellaire.aerbot.systems;
 import com.bellaire.aerbot.Environment;
 import com.bellaire.aerbot.input.InputMethod;
 import com.bellaire.aerbot.input.Xbox360Input;
+import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.RobotDrive;
+import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.command.PIDSubsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -16,6 +18,8 @@ public class WheelSystem extends PIDSubsystem implements RobotSystem {
     private RobotDrive wheels;
     private GyroSystem gyro;
     private SonarSystem sonar;
+    private Solenoid gear;
+    private Encoder encoder;
 
     public WheelSystem() {
         super(Kp, Ki, Kd);
@@ -33,10 +37,16 @@ public class WheelSystem extends PIDSubsystem implements RobotSystem {
 
         this.gyro = e.getGyroSystem();
         sonar = e.getSonarSystem();
+
+        encoder = new Encoder(3, 3);
+        encoder.start();
+        
+        gear = new Solenoid(3);
     }
 
     public void destroy() {
-
+        gear.free();
+        encoder.free();
     }
 
     public void setMotors(double left, double right) {
@@ -53,11 +63,20 @@ public class WheelSystem extends PIDSubsystem implements RobotSystem {
         //wheels.drive(-1.0, -gyro.getHeading() * 0.05);
     }
 
-    public void faceForward() {
-        if (gyro.getHeading() < 90 || (gyro.getHeading() < 270 && gyro.getHeading() > 180))
-            setMotors(-.25,.25);
+    public void automaticGearShift(){
+        if(encoder.getRate() > 3)
+            // if encoder rate is greater than gear shift speed
+            gear.set(true);
         else
+            gear.set(false);
+    }
+
+    public void faceForward() {
+        if (gyro.getHeading() < 90 || (gyro.getHeading() < 270 && gyro.getHeading() > 180)) {
+            setMotors(-.25, .25);
+        } else {
             setMotors(.25, -.25);
+        }
     }
 
     public void driveToDistance(double distance) {
