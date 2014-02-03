@@ -3,6 +3,7 @@ package com.bellaire.aerbot;
 import com.bellaire.aerbot.input.InputMethod;
 import com.bellaire.aerbot.input.JoystickInput;
 import com.bellaire.aerbot.input.Xbox360Input;
+import com.bellaire.aerbot.systems.AccelerometerSystem;
 import com.bellaire.aerbot.systems.CameraSystem;
 import com.bellaire.aerbot.systems.GyroSystem;
 import com.bellaire.aerbot.systems.IntakeSystem;
@@ -21,6 +22,7 @@ public class Environment {
     private GyroSystem gyro;
     private IntakeSystem intake;
     private SonarSystem sonar;
+    private AccelerometerSystem accelerometer;
 
     public Environment(RobotBase robot) {
         this.robot = robot;
@@ -41,6 +43,9 @@ public class Environment {
         
         this.sonar = new SonarSystem();
         this.sonar.init(this);
+        
+        this.accelerometer = new AccelerometerSystem();
+        this.accelerometer.init(this);
     }
 
     public InputMethod getInput() {
@@ -65,6 +70,10 @@ public class Environment {
     
     public SonarSystem getSonarSystem(){
         return sonar;
+    }
+    
+    public AccelerometerSystem getAccelerometerSystem(){
+        return accelerometer;
     }
 
     public boolean isAutonomous() {
