@@ -2,11 +2,8 @@ package com.bellaire.aerbot.systems;
 
 import com.bellaire.aerbot.Environment;
 import com.bellaire.aerbot.input.InputMethod;
-import com.bellaire.aerbot.input.Xbox360Input;
-import edu.wpi.first.wpilibj.Accelerometer;
-import edu.wpi.first.wpilibj.Encoder;
+import edu.wpi.first.wpilibj.Relay;
 import edu.wpi.first.wpilibj.RobotDrive;
-import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.command.PIDSubsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -19,7 +16,7 @@ public class WheelSystem extends PIDSubsystem implements RobotSystem {
     private RobotDrive wheels;
     private GyroSystem gyro;
     private SonarSystem sonar;
-    private Solenoid gear;
+    private Relay gear;
     private AccelerometerSystem accelerometer;
 
     public WheelSystem() {
@@ -41,7 +38,7 @@ public class WheelSystem extends PIDSubsystem implements RobotSystem {
         
         accelerometer = e.getAccelerometerSystem();
         
-        gear = new Solenoid(3);
+        gear = new Relay(3);
     }
 
     public void destroy() {
@@ -50,24 +47,27 @@ public class WheelSystem extends PIDSubsystem implements RobotSystem {
 
     public void setMotors(double left, double right) {
         wheels.setLeftRightMotorOutputs(left, right);
+        automaticGearShift();
     }
 
     public void drive(double outputMaginitude, double curve) {
         wheels.drive(outputMaginitude, curve);
+        automaticGearShift();
     }
 
     public void move(InputMethod input) {
         wheels.arcadeDrive(input.getLeftY(), input.getRightX());
         SmartDashboard.putNumber("Gyro Heading", gyro.getHeading());
         //wheels.drive(-1.0, -gyro.getHeading() * 0.05);
+        automaticGearShift();
     }
 
     public void automaticGearShift(){
         if(accelerometer.getSpeed() > 3)
             // if encoder rate is greater than gear shift speed
-            gear.set(true);
+            gear.set(Relay.Value.kForward);
         else
-            gear.set(false);
+            gear.set(Relay.Value.kReverse);
     }
 
     public void faceForward() {
