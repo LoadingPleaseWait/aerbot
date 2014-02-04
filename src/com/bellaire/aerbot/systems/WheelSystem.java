@@ -78,9 +78,9 @@ public class WheelSystem extends PIDSubsystem implements RobotSystem {
         }
     }
 
-    public void driveToDistance(double distance) {
+    public void driveDistance(double distance) {
         if (!getPIDController().isEnable()) {
-            setSetpoint(distance);
+            setSetpointRelative(distance);
             enable();
         } else if (getPosition() == distance) {
             disable();
@@ -93,12 +93,12 @@ public class WheelSystem extends PIDSubsystem implements RobotSystem {
         } else if (getPosition() == 0) {
             // if getPosition equals the point in front of the truss
             //shoot
-            driveToDistance(0);//driveToDistance point behind truss
+            driveDistance(0);//driveToDistance point behind truss
         } else if (getSetpoint() == 0) {
-            driveToDistance(0);//drive to point behind the truss
+            driveDistance(0);//drive to point behind the truss
         } else if (getSetpoint() != 0 || getSetpoint() == 0) {
             //if setpoint is not the point in front of the truss OR the setpoint is the point in front of the truss
-            driveToDistance(0);//drive to point in front of truss
+            driveDistance(0);//drive to point in front of truss
         }
     }
 
