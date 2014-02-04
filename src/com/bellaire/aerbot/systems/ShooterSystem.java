@@ -1,6 +1,7 @@
 package com.bellaire.aerbot.systems;
 
 import com.bellaire.aerbot.Environment;
+import com.bellaire.aerbot.input.InputMethod;
 import edu.wpi.first.wpilibj.AnalogChannel;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Jaguar;
@@ -14,6 +15,7 @@ public class ShooterSystem extends PIDSubsystem implements RobotSystem {
     public static final double LAUNCH_SPEED = 3;
     public static final double GRAVITY = 9.81;
     public static final double GOAL_HEIGHT = 3;
+    public static final double POT_DOWN = 3;
     private Environment env;
     private AnalogChannel pot;
     private Jaguar motors;
@@ -35,8 +37,17 @@ public class ShooterSystem extends PIDSubsystem implements RobotSystem {
 
     public void shoot(double distance) {
         double angle = 0;
-        setSetpoint(0.0);
+        while (pot.getVoltage() < angle / 72) {
+            motors.set(1);
+        }
+        motors.set(0);
+        setSetpoint(POT_DOWN);
         enable();
+    }
+    
+    public void fire(InputMethod input){
+        if(input.getShoot() && pot.getVoltage() == POT_DOWN)
+            shoot(env.getSonarSystem().getRangeInInches());
     }
 
     protected double returnPIDInput() {
