@@ -3,24 +3,24 @@ package com.bellaire.aerbot.systems;
 import com.bellaire.aerbot.Environment;
 import com.bellaire.aerbot.input.InputMethod;
 import edu.wpi.first.wpilibj.Jaguar;
-import edu.wpi.first.wpilibj.Solenoid;
+import edu.wpi.first.wpilibj.Relay;
 
 public class IntakeSystem implements RobotSystem {
-
+    
     private Jaguar motor;
-
-    private Solenoid arm;
-
+    
+    private Relay arm;
+    
     public void init(Environment e) {
         motor = new Jaguar(3);
-        arm = new Solenoid(5);
+        arm = new Relay(3);
     }
-
+    
     public void destroy() {
         motor.free();
         arm.free();
     }
-
+    
     public void intake(InputMethod input) {
         if (input.getIntakeIn()) {
             motor.set(1);
@@ -30,7 +30,11 @@ public class IntakeSystem implements RobotSystem {
             motor.set(0);
         }
         if (input.getIntakePneumatic()) {
-            arm.set(!arm.get());// when LB is pressed pneumatic piston turns on or off
+            if (arm.get().equals(Relay.Value.kReverse)) {
+                arm.set(Relay.Value.kForward);// when LB is pressed pneumatic piston turns on or off
+            } else {
+                arm.set(Relay.Value.kForward);
+            }
         }
     }
 }
