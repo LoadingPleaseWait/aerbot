@@ -1,6 +1,5 @@
 package com.bellaire.aerbot;
 
-import com.bellaire.aerbot.controllers.MotionTracker;
 import com.bellaire.aerbot.input.InputMethod;
 import com.bellaire.aerbot.input.Xbox360Input;
 import com.bellaire.aerbot.systems.AccelerometerSystem;
@@ -22,7 +21,6 @@ public class Environment {
     //private AccelerometerSystem accel;
     
     private Thread motionThread;
-    private MotionTracker motion;
 
     public Environment(RobotBase robot) {
         this.robot = robot;
@@ -65,9 +63,6 @@ public class Environment {
         return accel;
     }
   */  
-    public MotionTracker getMotionTracker() {
-        return motion;
-    }
     
     public boolean isAutonomous() {
         return robot.isAutonomous();

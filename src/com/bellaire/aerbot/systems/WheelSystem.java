@@ -1,7 +1,6 @@
 package com.bellaire.aerbot.systems;
 
 import com.bellaire.aerbot.Environment;
-import com.bellaire.aerbot.controllers.MotionTracker;
 import com.bellaire.aerbot.custom.RobotDrive3;
 import com.bellaire.aerbot.input.InputMethod;
 import edu.wpi.first.wpilibj.Relay;
@@ -16,8 +15,6 @@ public class WheelSystem implements RobotSystem {
     private Relay gearbox;
     private int gear = 0; // off
     private boolean gearPress = false;
-    
-    private MotionTracker motion;
 
     public WheelSystem() {
         //wheels.setExpiration(0.1);
