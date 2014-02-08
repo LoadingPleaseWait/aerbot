@@ -79,7 +79,7 @@ public class WheelSystem extends PIDSubsystem implements RobotSystem {
             wheels.arcadeDrive(-currentRampY, -currentRampX);
         }*/
         
-        SmartDashboard.putNumber("Sonar Distance", sonar.getDistance());
+        //SmartDashboard.putNumber("Sonar Distance", sonar.getDistance());
         
         //SmartDashboard.putNumber("Robot Heading", motion.getHeading());
         //SmartDashboard.putNumber("Robot Speed", motion.getSpeed());
