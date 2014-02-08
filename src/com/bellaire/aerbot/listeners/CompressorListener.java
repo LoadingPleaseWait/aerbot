@@ -30,7 +30,7 @@ public class CompressorListener implements Listener{
         if(digitalInput.get())
             relay.set(Relay.Value.kForward);
         else
-            relay.set(Relay.Value.kReverse);
+            relay.set(Relay.Value.kOff);
     }
     
 }
