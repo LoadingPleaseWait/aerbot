@@ -1,7 +1,6 @@
 package com.bellaire.aerbot.systems;
 
 import com.bellaire.aerbot.Environment;
-import com.bellaire.aerbot.systems.RobotSystem;
 import edu.wpi.first.wpilibj.Gyro;
 
 public class GyroSystem implements RobotSystem {
@@ -9,7 +8,7 @@ public class GyroSystem implements RobotSystem {
     private Gyro gyro;
     
     public void init(Environment e) {
-        //gyro = new Gyro(1);
+        gyro = new Gyro(1);
     }
     
     public double getHeading() {
@@ -23,4 +22,5 @@ public class GyroSystem implements RobotSystem {
     public void destroy() {
         
     }
+    
 }

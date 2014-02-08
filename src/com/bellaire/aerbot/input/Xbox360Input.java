@@ -53,7 +53,7 @@ public class Xbox360Input implements InputMethod {
         return controller.getRawAxis(3) < 0;
     }
 
-    public boolean getAim() {
-        return controller.getRawAxis(3) > 0;
+    public boolean gearSwitch() {
+        return controller.getRawButton(3);
     }
 }

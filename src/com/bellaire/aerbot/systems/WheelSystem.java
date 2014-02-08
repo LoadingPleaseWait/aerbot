@@ -1,6 +1,7 @@
 package com.bellaire.aerbot.systems;
 
 import com.bellaire.aerbot.Environment;
+import com.bellaire.aerbot.custom.RobotDrive3;
 import com.bellaire.aerbot.input.InputMethod;
 import edu.wpi.first.wpilibj.Relay;
 import edu.wpi.first.wpilibj.RobotDrive;
@@ -13,36 +14,38 @@ public class WheelSystem extends PIDSubsystem implements RobotSystem {
     private static final double Ki = .2;
     private static final double Kd = 0.0;
 
-    private RobotDrive wheels;
     private GyroSystem gyro;
     private SonarSystem sonar;
-    private Relay gear;
     private AccelerometerSystem accelerometer;
+    private RobotDrive3 wheels;
+    private Relay gearbox;
+    private int gear = 0; // off
+    private boolean gearPress = false;
+
+    private double currentLeftY = 0, currentRightX = 0;
+    private double currentRampY = 0, currentRampX = 0;
 
     public WheelSystem() {
         super(Kp, Ki, Kd);
     }
 
     public void init(Environment e) {
-        wheels = new RobotDrive(1, 2); // (1, 2, 3, 4) when unsplit
-
-        wheels.setInvertedMotor(RobotDrive.MotorType.kFrontRight, true);
-        wheels.setInvertedMotor(RobotDrive.MotorType.kFrontLeft, true);
-        wheels.setInvertedMotor(RobotDrive.MotorType.kRearRight, true);
-        wheels.setInvertedMotor(RobotDrive.MotorType.kRearLeft, true);
+        wheels = new RobotDrive3(1, 2);
 
         wheels.setSafetyEnabled(false);
 
         this.gyro = e.getGyroSystem();
         sonar = e.getSonarSystem();
-        
+
         accelerometer = e.getAccelerometerSystem();
-        
-        gear = new Relay(3);
+
+        this.sonar = e.getSonarSystem();
+
+        gearbox = new Relay(1);
+        this.gearsOff();
     }
 
     public void destroy() {
-        gear.free();
     }
 
     public void setMotors(double left, double right) {
@@ -55,19 +58,65 @@ public class WheelSystem extends PIDSubsystem implements RobotSystem {
         automaticGearShift();
     }
 
+
     public void move(InputMethod input) {
-        wheels.arcadeDrive(input.getLeftY(), input.getRightX());
-        SmartDashboard.putNumber("Gyro Heading", gyro.getHeading());
-        //wheels.drive(-1.0, -gyro.getHeading() * 0.05);
-        automaticGearShift();
+        currentLeftY = -input.getLeftY();
+        currentRightX = input.getRightX();
+        
+        currentRampY += (currentLeftY - currentRampY) * (20d/300d);
+        currentRampX += (currentRightX - currentRampX) * (20d/300d);
+        
+        /*if(currentLeftY == 0) {
+            currentRampY = 0;
+        }
+        if(currentRightX == 0) {
+            currentRampX = 0;
+        }*/
+        
+        wheels.arcadeDrive(currentRampY, currentRampX);
+        
+        /*if(sonar.getDistance() < 36) {
+            wheels.arcadeDrive(-currentRampY, -currentRampX);
+        }*/
+        
+        SmartDashboard.putNumber("Sonar Distance", sonar.getDistance());
+        
+        //SmartDashboard.putNumber("Robot Heading", motion.getHeading());
+        //SmartDashboard.putNumber("Robot Speed", motion.getSpeed());
+        
+        if(!input.gearSwitch()) {
+            gearPress = false;
+        }
+        
+        if(gearPress == false) {
+            if(input.gearSwitch()) {
+                gearPress = true;
+                if(gear == 0) { 
+                    this.gearsForward();
+                } else if(gear == 1) {
+                    this.gearsOff();
+                }
+            }
+        }
     }
 
-    public void automaticGearShift(){
-        if(accelerometer.getSpeed() > 3)
-            // if encoder rate is greater than gear shift speed
-            gear.set(Relay.Value.kForward);
-        else
-            gear.set(Relay.Value.kReverse);
+    public void automaticGearShift() {
+        if (accelerometer.getAccelerationX() > 3) // if encoder rate is greater than gear shift speed
+        {
+            gearsForward();
+        } else {
+            gearsOff();
+        }
+    }
+
+    public void gearsOff() {
+        gear = 0;
+        gearbox.set(Relay.Value.kOff);
+    }
+
+    public void gearsForward() {
+        gear = 1;
+        gearbox.set(Relay.Value.kReverse);
     }
 
     public void faceForward() {
@@ -103,7 +152,7 @@ public class WheelSystem extends PIDSubsystem implements RobotSystem {
     }
 
     protected double returnPIDInput() {
-        return sonar.getRangeInMM();
+        return sonar.getDistance();
     }
 
     protected void usePIDOutput(double d) {

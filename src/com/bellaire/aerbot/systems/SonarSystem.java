@@ -1,30 +1,23 @@
 package com.bellaire.aerbot.systems;
 
 import com.bellaire.aerbot.Environment;
-import edu.wpi.first.wpilibj.Ultrasonic;
+import edu.wpi.first.wpilibj.AnalogChannel;
 
+// multiply voltage by 512 * 5 to get it in inches
 public class SonarSystem implements RobotSystem {
 
-  private Ultrasonic ultrasonic;
-  public static int PING_CHANNEL = 0, ECHO_CHANNEL = 0;// change to the current channels on the bot
+    private AnalogChannel sonar;
+    
+    public void init(Environment e) {
+       sonar = new AnalogChannel(1);
+    }
 
-  public void init(Environment e) {
-    ultrasonic = new Ultrasonic(PING_CHANNEL, ECHO_CHANNEL);
-  }
-
-  public void destroy() {
-    ultrasonic.free();
-  }
-
-  public double getRangeInInches() {
-    return ultrasonic.getRangeInches();
-  }
-
-  public double getRangeInMM() {
-    return ultrasonic.getRangeMM();
-  }
-
-  public void ping() {
-    ultrasonic.ping();
-  }
+    public void destroy() {
+        
+    }
+    
+    public double getDistance() {
+        return sonar.getVoltage() * (512d / 5d);
+    }
+    
 }

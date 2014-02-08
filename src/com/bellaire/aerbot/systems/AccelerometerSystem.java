@@ -3,50 +3,34 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
 package com.bellaire.aerbot.systems;
 
 import com.bellaire.aerbot.Environment;
-import edu.wpi.first.wpilibj.Accelerometer;
+import edu.wpi.first.wpilibj.ADXL345_I2C;
 
-/**
- *
- * @author cmurphey100
- */
 public class AccelerometerSystem implements RobotSystem {
 
-    private Accelerometer accelerometer;
-    private Environment env;
-    private double speed;
-    private long lastTime;
-    private Thread updater;
-
-    private class SpeedUpdater implements Runnable {
-
-        public void run() {
-            lastTime = System.currentTimeMillis();
-            while (true) {
-                if (System.currentTimeMillis() - lastTime > 0) {
-                    speed += accelerometer.getAcceleration() * (System.currentTimeMillis() - lastTime);
-                    lastTime = System.currentTimeMillis();
-                }
-            }
-
-        }
-    }
-
+    private ADXL345_I2C accel;
+    
     public void init(Environment e) {
-        env = e;
-        accelerometer = new Accelerometer(3);
-        updater = new Thread(new SpeedUpdater());
-        updater.run();
+       accel = new ADXL345_I2C(1, ADXL345_I2C.DataFormat_Range.k2G);
+    }
+    
+    public double getAccelerationX() {
+        return accel.getAcceleration(ADXL345_I2C.Axes.kX);
+    }
+    
+    public double getAccelerationY() {
+        return accel.getAcceleration(ADXL345_I2C.Axes.kY);
+    }
+    
+    public double getAccelerationZ() {
+        return accel.getAcceleration(ADXL345_I2C.Axes.kZ);
     }
 
     public void destroy() {
-        accelerometer.free();
+        
     }
-
-    public double getSpeed() {
-        return speed;
-    }
-
+    
 }

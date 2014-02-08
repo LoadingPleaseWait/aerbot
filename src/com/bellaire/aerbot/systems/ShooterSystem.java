@@ -47,7 +47,7 @@ public class ShooterSystem extends PIDSubsystem implements RobotSystem {
     
     public void fire(InputMethod input){
         if(input.getShoot() && pot.getVoltage() == POT_DOWN)
-            shoot(env.getSonarSystem().getRangeInInches());
+            shoot(env.getSonarSystem().getDistance());
     }
 
     protected double returnPIDInput() {

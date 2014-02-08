@@ -43,8 +43,8 @@ public class JoystickInput implements InputMethod {
         return right.getTrigger();
     }
 
-    public boolean getAim() {
-        return left.getTrigger();
+    public boolean gearSwitch() {
+        return false;
     }
 
 }

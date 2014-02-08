@@ -4,7 +4,6 @@ import com.bellaire.aerbot.input.InputMethod;
 import com.bellaire.aerbot.input.JoystickInput;
 import com.bellaire.aerbot.input.Xbox360Input;
 import com.bellaire.aerbot.systems.AccelerometerSystem;
-import com.bellaire.aerbot.systems.CameraSystem;
 import com.bellaire.aerbot.systems.GyroSystem;
 import com.bellaire.aerbot.systems.IntakeSystem;
 import com.bellaire.aerbot.systems.SonarSystem;
@@ -16,8 +15,6 @@ public class Environment {
     private RobotBase robot;
 
     private InputMethod input;
-
-    private CameraSystem camera;
     private WheelSystem wheels;
     private GyroSystem gyro;
     private IntakeSystem intake;
@@ -31,9 +28,6 @@ public class Environment {
 
         this.gyro = new GyroSystem();
         this.gyro.init(this);
-
-        this.camera = new CameraSystem();
-        this.camera.init(this);
 
         this.wheels = new WheelSystem();
         this.wheels.init(this);
@@ -54,10 +48,6 @@ public class Environment {
 
     public WheelSystem getWheelSystem() {
         return wheels;
-    }
-
-    public CameraSystem getCameraSystem() {
-        return camera;
     }
 
     public GyroSystem getGyroSystem() {
