@@ -41,7 +41,7 @@ public class WheelSystem extends PIDSubsystem implements RobotSystem {
 
         this.sonar = e.getSonarSystem();
 
-        gearbox = new Relay(1);
+        gearbox = new Relay(2);
         this.gearsOff();
     }
 
@@ -71,15 +71,8 @@ public class WheelSystem extends PIDSubsystem implements RobotSystem {
          if(currentRightX == 0) {
          currentRampX = 0;
          }*/
-        if (input.getIntakeIn()) {
-            wheels.arcadeDrive(0.1, 0);
-        } else {
-            wheels.arcadeDrive(currentRampY, currentRampX);
-        }
+        wheels.arcadeDrive(currentRampY, currentRampX);
 
-        /*if(sonar.getDistance() < 36) {
-         wheels.arcadeDrive(-currentRampY, -currentRampX);
-         }*/
         //SmartDashboard.putNumber("Sonar Distance", sonar.getDistance());
         //SmartDashboard.putNumber("Robot Heading", motion.getHeading());
         //SmartDashboard.putNumber("Robot Speed", motion.getSpeed());
@@ -96,6 +89,10 @@ public class WheelSystem extends PIDSubsystem implements RobotSystem {
                     this.gearsOff();
                 }
             }
+        }
+
+        if (input.getIntakeIn()) {
+            faceForward();
         }
     }
 

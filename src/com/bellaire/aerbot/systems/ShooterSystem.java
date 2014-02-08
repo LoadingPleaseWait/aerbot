@@ -27,7 +27,7 @@ public class ShooterSystem extends PIDSubsystem implements RobotSystem {
     public void init(Environment e) {
         env = e;
         pot = new AnalogChannel(3);
-        motors = new Jaguar(3);
+        motors = new Jaguar(10);
     }
 
     public void destroy() {
@@ -46,8 +46,10 @@ public class ShooterSystem extends PIDSubsystem implements RobotSystem {
     }
     
     public void fire(InputMethod input){
-        if(input.getShoot() && pot.getVoltage() == POT_DOWN)
-            shoot(env.getSonarSystem().getDistance());
+        if(input.getShoot())
+            motors.set(.2);
+        else
+            motors.set(0);
     }
 
     protected double returnPIDInput() {
