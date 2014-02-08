@@ -92,6 +92,9 @@ public class WheelSystem extends PIDSubsystem implements RobotSystem {
                 }
             }
         }
+        
+        if(input.getIntakeIn())
+            faceForward();
     }
 
     public void automaticGearShift() {
