@@ -54,6 +54,6 @@ public class Xbox360Input implements InputMethod {
     }
 
     public boolean gearSwitch() {
-        return controller.getRawButton(3);
+        return controller.getRawButton(BUTTON_B);
     }
 }
