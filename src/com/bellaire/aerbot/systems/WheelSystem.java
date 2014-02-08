@@ -71,11 +71,6 @@ public class WheelSystem extends PIDSubsystem implements RobotSystem {
          if(currentRightX == 0) {
          currentRampX = 0;
          }*/
-        if (input.getIntakeIn()) {
-            wheels.arcadeDrive(0.1, 0);
-        } else {
-            wheels.arcadeDrive(currentRampY, currentRampX);
-        }
 
         /*if(sonar.getDistance() < 36) {
          wheels.arcadeDrive(-currentRampY, -currentRampX);
