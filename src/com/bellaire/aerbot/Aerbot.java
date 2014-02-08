@@ -41,4 +41,8 @@ public class Aerbot extends IterativeRobot {
     
     }
     
+    public void disabledInit(){
+        
+    }
+    
 }
