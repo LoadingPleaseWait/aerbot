@@ -58,42 +58,41 @@ public class WheelSystem extends PIDSubsystem implements RobotSystem {
         automaticGearShift();
     }
 
-
     public void move(InputMethod input) {
         currentLeftY = -input.getLeftY();
         currentRightX = input.getRightX();
-        
-        currentRampY += (currentLeftY - currentRampY) * (20d/300d);
-        currentRampX += (currentRightX - currentRampX) * (20d/300d);
-        
+
+        currentRampY += (currentLeftY - currentRampY) * (20d / 100d);
+        currentRampX += (currentRightX - currentRampX) * (20d / 100d);
+
         /*if(currentLeftY == 0) {
-            currentRampY = 0;
+         currentRampY = 0;
+         }
+         if(currentRightX == 0) {
+         currentRampX = 0;
+         }*/
+        if (input.getIntakeIn()) {
+            wheels.arcadeDrive(0.1, 0);
+        } else {
+            wheels.arcadeDrive(currentRampY, currentRampX);
         }
-        if(currentRightX == 0) {
-            currentRampX = 0;
-        }*/
-        
-        wheels.arcadeDrive(currentRampY, currentRampX);
-        
+
         /*if(sonar.getDistance() < 36) {
-            wheels.arcadeDrive(-currentRampY, -currentRampX);
-        }*/
-        
+         wheels.arcadeDrive(-currentRampY, -currentRampX);
+         }*/
         //SmartDashboard.putNumber("Sonar Distance", sonar.getDistance());
-        
         //SmartDashboard.putNumber("Robot Heading", motion.getHeading());
         //SmartDashboard.putNumber("Robot Speed", motion.getSpeed());
-        
-        if(!input.gearSwitch()) {
+        if (!input.gearSwitch()) {
             gearPress = false;
         }
-        
-        if(gearPress == false) {
-            if(input.gearSwitch()) {
+
+        if (gearPress == false) {
+            if (input.gearSwitch()) {
                 gearPress = true;
-                if(gear == 0) { 
+                if (gear == 0) {
                     this.gearsForward();
-                } else if(gear == 1) {
+                } else if (gear == 1) {
                     this.gearsOff();
                 }
             }
