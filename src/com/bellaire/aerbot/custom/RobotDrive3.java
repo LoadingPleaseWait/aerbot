@@ -35,11 +35,7 @@ public class RobotDrive3 extends RobotDrive {
         }
         
         // cube the rotate values
-        if (rotateValue >= 0.0) {
             rotateValue = (rotateValue * rotateValue * rotateValue);
-        } else {
-            rotateValue = -(rotateValue * rotateValue * rotateValue);
-        }
 
         if (moveValue > 0.0) {
             if (rotateValue > 0.0) {
