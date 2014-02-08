@@ -8,8 +8,9 @@ import edu.wpi.first.wpilibj.Relay;
 public class IntakeSystem implements RobotSystem {
     
     private Jaguar motor;
-    
     private Relay arm;
+    private boolean armPress;
+    private boolean armDown;
     
     public void init(Environment e) {
         motor = new Jaguar(3);
@@ -29,12 +30,16 @@ public class IntakeSystem implements RobotSystem {
         } else {
             motor.set(0);
         }
-        if (input.getIntakePneumatic()) {
-            if (arm.get().equals(Relay.Value.kReverse)) {
+        if(!input.getIntakePneumatic())
+            armPress = false;
+        else if (!armPress) {
+            armPress = true;
+            if (armDown) {
                 arm.set(Relay.Value.kForward);// when LB is pressed pneumatic piston turns on or off
             } else {
-                arm.set(Relay.Value.kForward);
+                arm.set(Relay.Value.kOff);
             }
+            armDown = !armDown;
         }
     }
 }
