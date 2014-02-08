@@ -41,7 +41,7 @@ public class WheelSystem extends PIDSubsystem implements RobotSystem {
 
         this.sonar = e.getSonarSystem();
 
-        gearbox = new Relay(1);
+        gearbox = new Relay(2);
         this.gearsOff();
     }
 
