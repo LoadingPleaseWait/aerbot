@@ -27,7 +27,7 @@ public class ShooterSystem extends PIDSubsystem implements RobotSystem {
     public void init(Environment e) {
         env = e;
         pot = new AnalogChannel(3);
-        motors = new Jaguar(3);
+        motors = new Jaguar(10);
     }
 
     public void destroy() {
