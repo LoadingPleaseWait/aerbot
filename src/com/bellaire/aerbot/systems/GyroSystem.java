@@ -8,7 +8,7 @@ public class GyroSystem implements RobotSystem {
     private Gyro gyro;
     
     public void init(Environment e) {
-        gyro = new Gyro(1);
+        gyro = new Gyro(2);
     }
     
     public double getHeading() {
