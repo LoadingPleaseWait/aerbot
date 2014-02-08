@@ -1,7 +1,6 @@
 package com.bellaire.aerbot;
 
 import com.bellaire.aerbot.listeners.AutonomousListener;
-import com.bellaire.aerbot.listeners.CompressorListener;
 import com.bellaire.aerbot.listeners.MovementListener;
 import com.bellaire.aerbot.listeners.Listener;
 import java.util.Vector;
@@ -15,15 +14,12 @@ public class Executer {
 
         MovementListener ml = new MovementListener();
         AutonomousListener al = new AutonomousListener();
-        CompressorListener cl = new CompressorListener();
         
         ml.init(e);
         al.init(e);
-        cl.init(e);
         
         notRunning.addElement(ml);
         notRunning.addElement(al);
-        notRunning.addElement(cl);
     }
 
     public void update() {

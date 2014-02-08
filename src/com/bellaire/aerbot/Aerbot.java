@@ -3,6 +3,7 @@ package com.bellaire.aerbot;
 
 import com.bellaire.aerbot.controllers.AutonomousController;
 import com.bellaire.aerbot.controllers.OperatorController;
+import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.camera.AxisCamera;
 
@@ -13,10 +14,14 @@ public class Aerbot extends IterativeRobot {
     
     private AutonomousController autonomous;
     private OperatorController operator;
+    
+    private Compressor compressor;
 
     public void robotInit() {
         this.environment = new Environment(this);
         this.exec = new Executer(environment);
+        this.compressor = new Compressor(1, 1);
+        this.compressor.start();
     }
 
     public void autonomousInit() {
