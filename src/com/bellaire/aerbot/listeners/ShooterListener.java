@@ -2,11 +2,10 @@ package com.bellaire.aerbot.listeners;
 
 import com.bellaire.aerbot.Environment;
 
-
-public class MovementListener implements Listener {
-
+public class ShooterListener implements Listener {
+    
     private Environment env;
-
+    
     public void init(Environment env) {
         this.env = env;
     }
@@ -16,11 +15,11 @@ public class MovementListener implements Listener {
     }
 
     public boolean shouldExecute() {
-        return env.isOperatorControl();
+        return true;
     }
 
     public void execute() {
-        env.getWheelSystem().move(env.getInput());
+        env.getShooterSystem().shoot(env.getInput());
     }
     
 }

@@ -1,11 +1,14 @@
 package com.bellaire.aerbot;
 
 import com.bellaire.aerbot.listeners.AutonomousListener;
+import com.bellaire.aerbot.listeners.CompressorListener;
 import com.bellaire.aerbot.listeners.MovementListener;
 import com.bellaire.aerbot.listeners.Listener;
+import com.bellaire.aerbot.listeners.ShooterListener;
 import java.util.Vector;
 
 public class Executer {
+
     private final Vector notRunning, running;
 
     public Executer(Environment e) {
@@ -14,12 +17,18 @@ public class Executer {
 
         MovementListener ml = new MovementListener();
         AutonomousListener al = new AutonomousListener();
-        
+        CompressorListener cl = new CompressorListener();
+        ShooterListener sl = new ShooterListener();
+
         ml.init(e);
         al.init(e);
+        cl.init(e);
+        sl.init(e);
         
         notRunning.addElement(ml);
         notRunning.addElement(al);
+        notRunning.addElement(cl);
+        notRunning.addElement(sl);
     }
 
     public void update() {
@@ -41,11 +50,11 @@ public class Executer {
             }
         }
     }
+
     public void execute(Listener listener) {
         running.addElement(listener);
         notRunning.removeElement(listener);
     }
-
 
     public boolean canExecute(Listener listener) {
         return true;
@@ -62,12 +71,12 @@ public class Executer {
             this.stop(l);
         }
     }
-    
+
     public void onTeleop() {
-        
+
     }
-    
+
     public void onAutonomous() {
-        
+
     }
 }
