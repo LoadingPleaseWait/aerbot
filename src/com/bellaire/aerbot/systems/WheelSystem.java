@@ -3,6 +3,7 @@ package com.bellaire.aerbot.systems;
 import com.bellaire.aerbot.Environment;
 import com.bellaire.aerbot.custom.RobotDrive3;
 import com.bellaire.aerbot.input.InputMethod;
+import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.Relay;
 import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.command.PIDSubsystem;
@@ -21,6 +22,7 @@ public class WheelSystem extends PIDSubsystem implements RobotSystem {
     private Relay gearbox;
     private int gear = 0; // off
     private boolean gearPress = false;
+    private Compressor compressor;
 
     private double currentLeftY = 0, currentRightX = 0;
     private double currentRampY = 0, currentRampX = 0;
@@ -43,6 +45,8 @@ public class WheelSystem extends PIDSubsystem implements RobotSystem {
 
         gearbox = new Relay(2);
         this.gearsOff();
+
+        this.compressor = e.getCompressor();
     }
 
     public void destroy() {
@@ -50,7 +54,6 @@ public class WheelSystem extends PIDSubsystem implements RobotSystem {
 
     public void setMotors(double left, double right) {
         wheels.setLeftRightMotorOutputs(left, right);
-        automaticGearShift();
     }
 
     public void drive(double outputMaginitude, double curve) {
@@ -91,8 +94,15 @@ public class WheelSystem extends PIDSubsystem implements RobotSystem {
             }
         }
 
-        if (input.getIntakeIn()) {
+        /*if (input.gearSwitch() && gyro.getHeading() > 2) {
             faceForward();
+        }*/
+        try {
+            SmartDashboard.putBoolean("Low gear: ", gearPress);
+            SmartDashboard.putNumber("Angle: ", gyro.getHeading());
+            SmartDashboard.putNumber("Range: ", sonar.getDistance());
+        } catch (NullPointerException ex) {
+
         }
     }
 
@@ -117,9 +127,9 @@ public class WheelSystem extends PIDSubsystem implements RobotSystem {
 
     public void faceForward() {
         if (gyro.getHeading() < 90 || (gyro.getHeading() < 270 && gyro.getHeading() > 180)) {
-            setMotors(-.25, .25);
+            setMotors(.2, -.2);
         } else {
-            setMotors(.25, -.25);
+            setMotors(-.2, .2);
         }
     }
 
